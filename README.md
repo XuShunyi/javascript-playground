@@ -1,2 +1,2 @@
-# javascript-playground
+# JavaScript-Playground
 shunyi's javascript playground
