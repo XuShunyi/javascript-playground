@@ -28,4 +28,17 @@
     link: function (message) {}
   };
   window['ADS']['log'] = new myLogger();
+  
+  function getBrowserWindowSize() {
+    var de = document.documentElement;
+    return {
+      'width': (
+        window.innnerWidth || (de && de.clientWidth) || document.body.clientWidth
+      ),
+      'height': (
+        window.innerHei || (de && de.clientHeight) || document.body.clientHeight
+      )
+    }
+  };
+  window['ADS']['getBrowserWindowSize'] = getBrowserWindowSize;
 })();
