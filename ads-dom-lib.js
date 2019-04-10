@@ -19,7 +19,28 @@
     
     var logWindow = null;
     var createWindow = function() {};
-    this.writeRaw = function(message) {};
+    this.writeRaw = function(message) {
+      if (!logWindow) createWindow();
+      
+      var li = document.createElement('LI');
+      li.style.padding = '2px';
+      li.style.border = '0';
+      li.style.borderBottom = '1px dotted black';
+      li.style.margin = '0';
+      li.style.color = '#000';
+      li.style.font = '9px/9px Verdana, Tahoma, Sans';
+      
+      if (typeof message = 'undefined') {
+        li.appendchild(document.createTextNode('Message was undefined'));
+      } else if (typeof li.innerHTML != undefined) {
+        li.innerHTML = message;
+      } else {
+        li.appendchild(document.createTextNode(message));
+      }
+      
+      logWindow.appendChild(li);
+      return true;
+    };
   }
   
   myLogger.prototype = {
