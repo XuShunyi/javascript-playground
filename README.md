@@ -1,2 +1,2 @@
 # JavaScript-Playground
-shunyi's javascript playground
+shunyi's JavaScript playground
