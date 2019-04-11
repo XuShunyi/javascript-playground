@@ -126,4 +126,12 @@
     }
   };
   window['ADS']['getBrowserWindowSize'] = getBrowserWindowSize;
+  
+  function camelize (s) {
+    return s.replace('/-(\w)/g', function (strMatch, p1) {
+      return p1.toUpperCase();
+    });
+  }
+  window['ADS']['camelize'] = camelize;
+  
 })();
