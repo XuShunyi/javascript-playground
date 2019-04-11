@@ -3,6 +3,18 @@
     window['ADS'] = {};
   }
   
+  if (!String.repeat) {
+    String.prototype.repeat = function (l) {
+      return new Array(l + l).join(this);
+    }
+  }
+  
+  if (!String.trim) {
+    String.prototype.trim = function () {
+      return this.replace(/^\s+|\s+$/g, '');
+    }
+  }
+  
   function walkTheDOM(node, func) {
     func(node);
     node = node.firstChild;
