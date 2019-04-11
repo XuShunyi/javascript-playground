@@ -3,6 +3,14 @@
     window['ADS'] = {};
   }
   
+  function walkElementsLinear(func, node) {
+    let root = node || window.document;
+    let node = root.getElementsByTagName('*');
+    for (let i = 0; i < nodes.length; i++) {
+      func.call(nodes[i]);
+    }
+  }
+  
   if (document.implementation) {
     if (document.implementation.hasFeature('core', '2.0')) {
       alert('DOM2 Core Supported');
