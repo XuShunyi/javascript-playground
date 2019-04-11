@@ -11,6 +11,16 @@
     }
   }
   
+  function walkTheDOMRecursive(func, node, depth, returnedFromParent) {
+    let root = node || window.ducument;
+    let returnedFromParent = func.call(root, depth++, returnedFromParent);
+    let node = root.firstChild;
+    while(node) {
+      walkTheDOMRecursive(func, node, depth, returnedFromParent);
+      node = node.nextSibling;
+    }
+  }
+  
   if (document.implementation) {
     if (document.implementation.hasFeature('core', '2.0')) {
       alert('DOM2 Core Supported');
