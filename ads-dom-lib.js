@@ -3,6 +3,16 @@
     window['ADS'] = {};
   }
   
+  if (document.implementation) {
+    if (document.implementation.hasFeature('core', '2.0')) {
+      alert('DOM2 Core Supported');
+    } else {
+      alert('DOM2 Core Not Supported');
+    }
+  } else {
+    alert('No DOMImplementation Support');
+  }
+  
   window['ADS']['node'] = {
     ELEMENT_NODE: 1,
     ATTRIBUTE_NODE: 2,
