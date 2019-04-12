@@ -134,4 +134,24 @@
   }
   window['ADS']['camelize'] = camelize;
   
+  function stopPropagration (eventObject) {
+    eventObject = eventObject || getEventObject(eventObject);
+    if (eventObject.stopPropagation) {
+      eventObject.stopPropagation();
+    } else {
+      eventObject.cancelBubble = true;
+    }
+  }
+  window['ADS']['stopPropagation'] = stopPropagation;
+  
+  function preventDefault (eventObject) {
+    eventObject = eventObject || getEventObject(eventObject);
+    if (eventObject.preventDefault) {
+      eventObject.preventDefault();
+    } else {
+      eventObject.returnValue = false;
+    }
+  }
+  window['ADS']['preventDefault'] = preventDefault;
+  
 })();
