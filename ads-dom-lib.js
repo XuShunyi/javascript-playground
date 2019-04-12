@@ -167,4 +167,36 @@
   }
   window['ADS']['addEvent'] = addEvent;
   
+  function addLoadEvent (loadEvent, waitForImages) {
+    if (!isCompatible()) return false;
+    if (waitForImages) {
+      return addEvent(window, 'load', loadEvent);
+    }
+    let init = function () {
+      if (arguments.callee.done) return;
+      arguments.callee.done = true;
+      loadEvent.apply(document, arguments);
+    };
+    if (document.addEventListener) {
+      document.addEvnetListener('DOMContentLoaded', init, false);
+    }
+    if (/WebKit/i.test(navigator.userAgent)) {
+      let _timer = setInterval(function () {
+        if (/loaded | complete/.test(document.readyState)) {
+          clearInterval(_timer);
+          init();
+        }
+      }, 10);
+    }
+    document.write("<script id=__ie_onload defer scr=javascript:void(0)><\/script>");
+    let script = document.getElementById("__ie_onload");
+    script.onreadystatechange = function () {
+      if (this.readyState === 'complete') {
+        init();
+      }
+    };
+    return true;
+  }
+  window['ADS']['addLoadEvent'] = addLoadEvent;
+  
 })();
