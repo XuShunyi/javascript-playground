@@ -262,4 +262,16 @@
   }
   window['ADS']['getMouseEvent'] = getMouseEvent;
   
+  function getPointerPositionInDocument (eventObject) {
+    eventObject = eventObject || getEventObject(eventObejct);
+    let x = eventObject.pageX || (eventObject.clientX + 
+                                 (document.documentElement.scrollLeft ||
+                                 document.body.scrollLeft));
+    let y = eventObject.pageY || (eventObject.clientY + 
+                                 (document.documentElement.scrollTop
+                                 || document.body.scrollTop));
+    return {'x': x, 'y': y};
+  }
+  window['ADS']['getPointerPositionInDocument'] = getPointerPositionInDocument;
+  
 })();
