@@ -216,4 +216,50 @@
   }
   window['ADS']['getTarget'] = getTarget;
   
+  function getMouseButton (eventObject) {
+    eventObject = eventObejct || getEventObject(eventObject);
+    
+    let buttons = {
+      'left': false,
+      'middle': false,
+      'right': false
+    };
+    if (eventObject.toString && eventObject.toString().indexOf('MouseEvent') != -1) {
+      swith (eventObject.button) {
+        case 0: buttons.left = true; break;
+        case 1: buttons.middle = true; break;
+        case 2: buttons.right = true; break;
+        default: break;
+      }
+    } else if (eventObject.button) {
+      swith (eventObject.button) {
+        case 1: buttons.left = true; break;
+        case 2: buttons.right = true; break;
+        case 3: 
+            buttons.left = true;
+            buttons.right = true;
+        break;
+        case 4: buttons.middle = true; break;
+        case 5: 
+            buttons.left = true;
+            buttons.middle = true;
+        break;
+        case 6:
+            buttons.middle = true;
+            buttons.right = true;
+        break;
+        case 7:
+            buttons.left = true;
+            buttons.middle = true;
+            buttons.right = true;
+        break;
+        default: break;
+      }
+    } else {
+      return false;
+    }
+    return buttons;
+  }
+  window['ADS']['getMouseEvent'] = getMouseEvent;
+  
 })();
