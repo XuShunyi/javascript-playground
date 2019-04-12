@@ -204,4 +204,16 @@
   }
   window['ADS']['addLoadEvent'] = addLoadEvent;
   
+  function getTarget (eventObject) {
+    eventObject = eventObject || getEventObject(eventObject);
+    
+    let target = eventObject.target || eventObject.srcElement;
+    
+    if (target.nodeType == ADS.node.TEXT_NODE) {
+      target = node.parentNode;
+    }
+    return target;
+  }
+  window['ADS']['getTarget'] = getTarget;
+  
 })();
