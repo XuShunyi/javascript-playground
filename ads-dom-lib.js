@@ -134,6 +134,11 @@
   }
   window['ADS']['camelize'] = camelize;
   
+  function getEventObject (W3CEvent) {
+    return W3CEvent || window.event;
+  }
+  window['ADS']['getEventObject'] = getEventObject;
+  
   function stopPropagration (eventObject) {
     eventObject = eventObject || getEventObject(eventObject);
     if (eventObject.stopPropagation) {
