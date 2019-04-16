@@ -274,4 +274,12 @@
   }
   window['ADS']['getPointerPositionInDocument'] = getPointerPositionInDocument;
   
+  function getKeyPressed (eventObject) {
+    eventObject = eventObject || getEventObject(eventObject);
+    let code = eventObject.keyCode;
+    let value = String.fromCharCode(code);
+    return {'code': code, 'value': value};
+  }
+  window['ADS']['getKeyPressed'] = getKeyPressed;
+  
 })();
