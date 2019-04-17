@@ -316,4 +316,20 @@
   }
   window['ADS']['setStylesByTagName'] = setStylesByTagName;
   
+  function getStyle (element, property) {
+    if (!(element = $(element)) || !property) return false;
+    let value = element.style[camelize(property)];
+    if (!value) {
+      if (document.defaultView && document.defaultView.getComputedStyle) {
+        let css = document.defaultView.getComputedStyle(element, null);
+        value = css ? css.getPropertyValue(property) : null;
+      } else if (element.currentStyle) {
+        value = element.currentStyle[camelize(property)];
+      }
+    }
+    return value == 'auto' ? '' : value;
+  }
+  window['ADS']['getStyle'] = getStyle;
+  window['ADS']['getStyleById'] = getStyle;
+  
 })();
