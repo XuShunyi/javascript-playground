@@ -282,4 +282,38 @@
   }
   window['ADS']['getKeyPressed'] = getKeyPressed;
   
+  function setStyleById (element, styles) {
+    if (!(element = $(element))) return false;
+    for (property in styles) {
+      if (!styles.hasOwnProperty(property)) continue;
+      if (element.style.setProperty) {
+        element.style.setProperty(uncamelize(property, '-'), styles[property], null);
+      } else {
+        element.style[camelize(property)] = styles[property];
+      }
+    }
+    return true;
+  }
+  window['ADS']['setStyle'] = setStyleById;
+  window['ADS']['setStyleById'] = setStyleById;
+  
+  function setStyleByClassName (parent, tag, className, styles) {
+    if (!(parent = $(parent))) return false;
+    let element = getElementByClassName(className, tag, parent);
+    for (let e = 0; e < elements.length, e++) {
+      setStyleById(elements[e], styles);
+    }
+    return false;
+  }
+  window['ADS']['setStylesByClassName'] = setStylesByClassName;
+  
+  function setStylesByTagName (tagname, styles, parent) {
+    parent = $(parent) || document;
+    let elements = parent.getElementsByTagName(tagname);
+    for (let e = 0; e < elements.length; e++) {
+      setStyleById(elements[e], styles);
+    }
+  }
+  window['ADS']['setStylesByTagName'] = setStylesByTagName;
+  
 })();
