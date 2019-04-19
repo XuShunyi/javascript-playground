@@ -388,4 +388,27 @@
   }
   window['ADS']['removeStyleSheet'] = removeStyleSheet;
   
+  function getStyleSheets (url, media) {
+    let sheets = [];
+    for (let i = 0; i < document.styleSheets.length; i++) {
+      if (url && document.styleSheets[i].href.indexOf(url) == -1) {
+        continue;
+      }
+      if (media) {
+        media = media.replace(/,\s*/, ',');
+        let sheetMedia;
+        if (document.styleSheets[i].media.mediaText) {
+          sheetMedia = document.styleSheets[i].media.mediaText.replace(/,\s*/, ',');
+          sheetMedia = sheetMedia.replace(/,\s*$/, '');
+        } else {
+          sheetMedia = document.styleSheets[i].media.replace(/,\s*/, ',');
+        }
+        if (media != sheetMedia) { continue; }
+      }
+      sheets.push(document.styleSheets[i]);
+    }
+    return sheets;
+  }
+  window['ADS']['getStyleSheets'] = getStyleSheets;
+  
 })();
