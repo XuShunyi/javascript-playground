@@ -367,4 +367,25 @@
   };
   window['ADS']['removeClassName'] = removeClassName;
   
+  function addStyleSheet (url, media) {
+    media = media || 'screen';
+    let link = document.createElement('LINK');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('type', 'text/css');
+    link.setAttribute('href', url);
+    link.setAttribute('media', media);
+    document.getElementByTagName('head')[0].appendChild(link);
+  }
+  window['ADS']['addStyleSheet'] = addStyleSheet;
+  
+  function removeStyleSheet (url, media) {
+    let styles = getStyleSheets(url, media);
+    for (let i = 0; i < styles.length; i++) {
+      let node = styles[i].ownerNode || styles[i].owningElement;
+      styles[i].disabled = true;
+      node.parentNode.removeChilde(node);
+    }
+  }
+  window['ADS']['removeStyleSheet'] = removeStyleSheet;
+  
 })();
