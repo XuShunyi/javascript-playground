@@ -411,4 +411,42 @@
   }
   window['ADS']['getStyleSheets'] = getStyleSheets;
   
+  function editCSSRule (selector, styles, url, media) {
+    let styleSheets = (typeof url == 'array' ? url : getStyleSheets(url, media));
+    for (let i = 0; i < styleSheets.length; i++) {
+      let rules = styleSheets[i].cssRules || styleSheets[i].rules;
+      if (!rules) { continue; }
+      selector = selector.toUpperCase();
+      for (let j = 0; j < rules.length; j++) {
+        if (rules[j].selectorText.toUpperCase() == selector) {
+          for (property in styles) {
+            if (!styles.hasOwnProperty(property)) { continue; }
+            rules[j].style[camelize(property)] = styles[property];
+          }
+        }
+      }
+    }
+  }
+  window['ADS']['editCSSRule'] = editCSSRule;
+  
+  function addCSSRule (selector, styles, index, url, media) {
+    let declaration = '';
+    for (property in styles) {
+      if (!styles.hasOwnProperty(property)) { continue; }
+      declaration += property + ':' + styles[property] + '; ';
+    }
+    let styleSheets = (typeof url == 'array' ? url : getStyleSheets(url, media));
+    let newIndex;
+    for (let i = 0; i < styleSheets.length; i++) {
+      if (styleSheets[i].insertRule) {
+        newIndex = (index >= 0 ? index : styleSheets[i].cssRule.length);
+        styleSheets[i].insertRule(selector + ' { ' + declaration + ' } ', newIndex);
+      } else if (styleSheets[i].addRule) {
+        newIndex = (index >= 0 ? index : -1);
+        styleSheets[i].addRule(selector, declaration, newIndex);
+      }
+    }
+  }
+  window['ADS']['addCSSRule'] = addCSSRule;
+  
 })();
