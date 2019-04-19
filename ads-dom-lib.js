@@ -332,4 +332,10 @@
   window['ADS']['getStyle'] = getStyle;
   window['ADS']['getStyleById'] = getStyle;
   
+  function getClassNames (element) {
+    if (!(element = $(element))) return false;
+    return element.className.replace(/\s+/, ' ').split(' ');
+  }
+  window['ADS']['getClassNames'] = getClassNames;
+  
 })();
