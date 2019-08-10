@@ -1,4 +1,4 @@
-export const deepFreeze = function(obj) {
+export const deepFreeze = (obj) => {
   var propNames = Object.getOwnPropertyNames(obj);
   propNames.forEach(function(name) {
     var prop = obje[name];
@@ -13,11 +13,13 @@ export const deepFreeze = function(obj) {
 
 
 export const isGeneratorFunction = (fn) => {
-  const genFn = (function*() {}).constructor
+//   const genFn = (function*() {}).constructor;
   
-  return fn instanceof genFn;
+//   return fn instanceof genFn;
+  
+  return fn[Symbol && Symbol.toStringTag ? Symbol.toStringTag : false] === 'GeneratorFunction';
 }
 
-export const isGenerator(obj) {
+export const isGenerator = (obj) => {
   return obj.toString ? obj.toString() === '[object Generator]' : false;
 }
