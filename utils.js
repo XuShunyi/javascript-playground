@@ -23,3 +23,29 @@ export const isGeneratorFunction = (fn) => {
 export const isGenerator = (obj) => {
   return obj.toString ? obj.toString() === '[object Generator]' : false;
 }
+
+
+export const debounce = (fn, milliseconds) => {
+  let timeout = null;
+  return function() {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      fn.apply(this, arguments);
+    }, milliseconds);
+  };
+}
+
+export const throttle = (fn, milliseconds) => {
+  let canRun = true;
+  return function () {
+    if (!canRun) {
+      return;
+    }
+    canRun = false;
+    setTimeout(() => {
+      fn.apply(this, arguments);
+      canRun = true;
+    }, 500);
+  };
+}
+
