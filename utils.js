@@ -1,3 +1,12 @@
+export const uncurrying = function() {
+  let self = this;
+  
+  return function() {
+    let obj = Array.prototype.shift.call(arguments);
+    return self.apply(obj, arguments);
+  };
+};
+
 export const getSingle = (fn) => {
   let ret;
   return function() {
