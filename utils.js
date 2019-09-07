@@ -1,3 +1,10 @@
+export const getSingle = (fn) => {
+  let ret;
+  return function() {
+    return ret || (ret = fn.apply(this, arguments));
+  };
+};
+
 export const deepFreeze = (obj) => {
   var propNames = Object.getOwnPropertyNames(obj);
   propNames.forEach(function(name) {
