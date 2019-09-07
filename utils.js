@@ -49,3 +49,9 @@ export const throttle = (fn, milliseconds) => {
   };
 }
 
+export const isType = (type) => {
+  return function(obj) {
+    return Object.prototype.toString.call(obj) === '[object ' + type + ']';
+  }
+};
+
