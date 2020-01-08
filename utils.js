@@ -82,3 +82,9 @@ export const addQueryStringArg = (url, name, value) => {
   return url;
 }
 
+export const assert(condition, message) {
+  if (!condition) {
+    throw new Error(message);
+  }
+}
+
