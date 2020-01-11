@@ -82,9 +82,15 @@ export const addQueryStringArg = (url, name, value) => {
   return url;
 }
 
-export const assert(condition, message) {
+export const assert = (condition, message) => {
   if (!condition) {
     throw new Error(message);
   }
+}
+
+export const $$ = (selector, context) => {
+  context = context || document;
+  var elements = context.querySelectorAll(selector);
+  return Array.prototype.slice.call(elements);
 }
 
