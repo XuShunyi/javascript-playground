@@ -118,3 +118,25 @@ export const deepClone = (target) => {
   return result
 }
 
+export const deepCloneAdvanced = (obj) => {
+  let map = new WeakMap()
+  function deep (data) {
+    let result = {}
+    const keys = [...Object.getOwnPropertyNames(data), ...Object.getOwnPropertySymbols(data)]
+    if (!keys.length) return data
+    const exist = map.get(data)
+    if (exist) return exist
+    map.set(data, result)
+    keys.forEach(key => {
+      let item = data[key]
+      if (typeof item === 'object' && item) {
+        result[key] = deep(item)
+      } else {
+        result[key] = item
+      }
+    })
+    return result
+  }
+  return deep(obj)
+}
+
