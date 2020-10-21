@@ -1,3 +1,18 @@
+// 柯里化通用函数
+export const curry (func) {
+  return function curriedFn (...args) {
+    // 判断实惨和参数的个数
+    if (args.length < func.length) {
+      // 实参个数小于形参个数，继续柯里化
+      return function () {
+        return curriedFn(...args.concat(Array.from(arguments)))
+      }
+    }
+    // 形参个数等于实参个数执行func
+    return func(...args)
+  }
+}
+
 export const uncurrying = function() {
   let self = this;
   
